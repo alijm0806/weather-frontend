@@ -27,6 +27,16 @@ export default {
         this.weathers = response.data;
 
       })
+    },
+    dateBuilder() {
+      let d = new Date();
+      let months = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
+      let days = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"];
+      let day = days[d.getDay()];
+      let date = d.getDate();
+      let month = months[d.getMonth()];
+      let year = d.getFullYear();
+      return `${day} ${date} ${month} ${year}`;
     }
   }
 }
@@ -50,18 +60,14 @@ export default {
             <div class="location-box">
               <div class="location">
                 {{ weathers.name }}, {{ weathers.sys.country }}
-
+                <div class="date">{{ dateBuilder() }}</div>
               </div>
-
-              <div class="date">saturday 3 september 2022</div>
             </div>
 
             <div class="weather-box">
               <div class="temp">{{ Math.round(this.weathers.main.temp) }}</div>
               <div class="weather">{{ weathers.weather[0].main }}</div>
-              <p>
 
-              </p>
             </div>
           </div>
 
