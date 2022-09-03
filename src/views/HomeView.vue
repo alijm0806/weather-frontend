@@ -42,7 +42,7 @@ export default {
 <template>
   <div class="container">
     <div class="home">
-      <div id="app" :class="typeof weathers.main != 'undefined' && weathers.main.temp > 70 ? 'warm' : ''">
+      <div id="app" :class="typeof weathers.main != 'undefined' && weathers.main.temp > 16 ? 'warm' : ''">
         <main>
           <form v-on:submit.prevent="submit()">
             <div class="search-box">
