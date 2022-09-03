@@ -9,16 +9,11 @@ export default {
       weathers: {},
       weather: {},
       params: {},
-
-
-
     };
   },
   created: function () { },
   methods: {
-
-
-    weathersIndex: function (params) {
+    submit: function (params) {
       console.log('weathers index');
       console.log(this.params);
       var params = this.params
@@ -41,6 +36,7 @@ export default {
   }
 }
 
+
 </script>
 
 
@@ -51,37 +47,29 @@ export default {
         <h1><b>{{ message1 }}</b></h1>
 
         <main>
-          <div class="search-box">
-            <input type="text" class="search-bar" placeholder="Search..." v-model="params.city">
+          <form v-on:submit.prevent="submit()">
+            <div class="search-box">
+              <input type="text" class="search-bar" placeholder="Search..." v-model="params.city">
 
-            <button v-on:click="weathersIndex(params)">Press</button>
-          </div>
-          <div class="weather-wrap" v-if="typeof weathers.main != 'undefined'">
-            <div class="location-box">
-              <div class="location">
-                {{ weathers.name }}, {{ weathers.sys.country }}
-                <div class="date">{{ dateBuilder() }}</div>
+
+            </div>
+            <div class="weather-wrap" v-if="typeof weathers.main != 'undefined'">
+              <div class="location-box">
+                <div class="location">
+                  {{ weathers.name }}, {{ weathers.sys.country }}
+                  <div class="date">{{ dateBuilder() }}</div>
+                </div>
+              </div>
+
+              <div class="weather-box">
+                <div class="temp">{{ Math.round(this.weathers.main.temp) }}</div>
+                <div class="weather">{{ weathers.weather[0].main }}</div>
+
               </div>
             </div>
 
-            <div class="weather-box">
-              <div class="temp">{{ Math.round(this.weathers.main.temp) }}</div>
-              <div class="weather">{{ weathers.weather[0].main }}</div>
-
-            </div>
-          </div>
-
-
-
-
-
+          </form>
         </main>
-
-
-
-
-
-
       </div>
 
     </div>
