@@ -5,7 +5,6 @@ import { assertExpressionStatement } from '@babel/types';
 export default {
   data: function () {
     return {
-      message1: "HELLO!!",
       weathers: {},
       weather: {},
       params: { city: "Austin" },
@@ -43,13 +42,11 @@ export default {
 <template>
   <div class="container">
     <div class="home">
-      <div id="app">
+      <div id="app" :class="typeof weathers.main != 'undefined' && weathers.main.temp > 70 ? 'warm' : ''">
         <main>
           <form v-on:submit.prevent="submit()">
             <div class="search-box">
               <input type="text" class="search-bar" placeholder="Search..." v-model="params.city">
-
-
             </div>
             <div class="weather-wrap" v-if="typeof weathers.main != 'undefined'">
               <div class="location-box">
@@ -60,10 +57,16 @@ export default {
               </div>
 
               <div class="weather-box">
-                <div class="temp">{{ Math.round(this.weathers.main.temp) }}</div>
+                <div class="temp">{{ (Math.round(this.weathers.main.temp) * 9 / 5) + 32 }} °F
+                  <br>
+                  {{ Math.round(this.weathers.main.temp) }} °C
+                </div>
                 <div class="weather">{{ weathers.weather[0].main }}</div>
+                <div class="weather">huimidity : {{ weathers.main.humidity }} %</div>
 
               </div>
+
+
             </div>
 
           </form>
