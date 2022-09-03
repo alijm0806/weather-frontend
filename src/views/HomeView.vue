@@ -8,16 +8,16 @@ export default {
       message1: "HELLO!!",
       weathers: {},
       weather: {},
-      params: {},
+      params: { city: "Austin" },
     };
   },
-  created: function () { },
+  created: function () { this.submit() },
   methods: {
     submit: function (params) {
       console.log('weathers index');
       console.log(this.params);
       var params = this.params
-      var weathers = axios.get("/weathers.json", { params }).then(response => {
+      axios.get("/weathers.json", { params }).then(response => {
         console.log(response.data);
         this.weathers = response.data;
 
@@ -44,8 +44,6 @@ export default {
   <div class="container">
     <div class="home">
       <div id="app">
-        <h1><b>{{ message1 }}</b></h1>
-
         <main>
           <form v-on:submit.prevent="submit()">
             <div class="search-box">
