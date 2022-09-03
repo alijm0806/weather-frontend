@@ -6,14 +6,31 @@ export default {
   data: function () {
     return {
       message1: "HELLO!!",
+      weathers: {},
+      weather: {},
+      params: {},
+
+
 
     };
   },
   created: function () { },
   methods: {
 
+
+    weathersIndex: function (params) {
+      console.log('weathers index');
+      console.log(this.params);
+      var params = this.params
+      var weathers = axios.get("/weathers.json", { params }).then(response => {
+        console.log(response.data);
+        this.weathers = response.data;
+
+      })
+    }
   }
 }
+
 </script>
 
 
@@ -22,19 +39,29 @@ export default {
     <div class="home">
       <div id="app">
         <h1><b>{{ message1 }}</b></h1>
+
         <main>
           <div class="search-box">
-            <input type="text" class="search-bar" placeholder="Search...">
+            <input type="text" class="search-bar" placeholder="Search..." v-model="params.city">
+
+            <button v-on:click="weathersIndex(params)">Press</button>
           </div>
-          <div class="weather-wrap">
+          <div class="weather-wrap" v-if="typeof weathers.main != 'undefined'">
             <div class="location-box">
-              <div class="location">Austin, TX</div>
+              <div class="location">
+                {{ weathers.name }}, {{ weathers.sys.country }}
+
+              </div>
+
               <div class="date">saturday 3 september 2022</div>
             </div>
 
             <div class="weather-box">
-              <div class="temp">9°c</div>
-              <div class="weather">Rain</div>
+              <div class="temp">{{ Math.round(this.weathers.main.temp) }}</div>
+              <div class="weather">{{ weathers.weather[0].main }}</div>
+              <p>
+
+              </p>
             </div>
           </div>
 
@@ -43,6 +70,7 @@ export default {
 
 
         </main>
+
 
 
 
