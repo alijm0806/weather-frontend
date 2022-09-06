@@ -57,11 +57,11 @@ export default {
               </div>
 
               <div class="weather-box">
-                <div class="temp">{{ (Math.round(this.weathers.main.temp) * 9 / 5) + 32 }} °F
+                <div class="temp">{{ (Math.round((this.weathers.main.temp) * 9 / 5) + 32) }} °F
                   <br>
                   {{ Math.round(this.weathers.main.temp) }} °C
                 </div>
-                <div class="weather">{{ weathers.weather[0].main }}</div>
+                <div class="weather">{{ weathers.weather[0].description }}</div>
                 <div class="weather">huimidity : {{ weathers.main.humidity }} %</div>
 
               </div>
